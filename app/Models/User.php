@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'age',
+        'gender',
     ];
 
     /**
@@ -41,5 +42,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+    ];
+
+    /**
+     * The validation rules for the user model.
+     *
+     * @var array<string, string>
+     */
+    public static $rules = [
+        'name' => 'required|string|max:255',
+        'age' => 'required|integer|min:18',
+        'gender' => 'required|in:male,female',
     ];
 }
